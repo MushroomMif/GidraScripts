@@ -1,0 +1,12 @@
+cooldown: 5s
+
+header:
+  - "<&color[#6fa8dc]>Gidra"
+  - "<&gradient[from=<&color[aqua]>;to=<&color[light_purple]>]>Бесконечное приключение"
+  - "&6Пинг: <proc[colored_ping]>"
+  - "%end%"
+
+footer:
+  - ""
+  - " &7TPS: <proc[colored_tps]>   &6|   &7MSPT: <proc[colored_mspt]> "
+  - "%end%"
