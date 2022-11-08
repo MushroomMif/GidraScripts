@@ -1,3 +1,4 @@
+# Спавн кастомных стендов после нажатия соотвествующим предметом
 stand_with_arms:
     type: world
     debug: false
@@ -35,6 +36,8 @@ statuette_with_arms:
                 - look <entry[stand].spawned_entity> <player.eye_location>
                 - take iteminhand quantity:1 if:!<player.gamemode.equals[creative]>
 
+# Установка позы стенду
+# P.S. Плагины используют другой формат позы стендов, а переводить мне было лень, поэтому тут тупо команды с датапака
 pose_stand:
     type: task
     debug: false
@@ -74,6 +77,7 @@ pose_stand:
         - default:
             - debug ERROR "Неверная поза для стойки"
 
+# Установка позы, кода рядом шифтит игрок
 pose_on_shift:
     type: world
     debug: false
@@ -90,6 +94,7 @@ pose_on_shift:
         - flag <[entity]> pose:++
         - run pose_stand def:<[entity]>|<[entity].flag[pose]>
 
+# Запуск проверок на блок под стендом
 stands_tick_loop:
     type: world
     debug: false
@@ -105,6 +110,7 @@ stands_tick_loop:
             - if ( <[entity].entity_type> == armor_stand ) && <[entity].arms>:
                 - run stand_tick def:<[entity]>
 
+# Собственно сами проверки
 stand_tick:
     type: task
     debug: false
@@ -112,11 +118,13 @@ stand_tick:
     script:
     #- while <[entity].location.chunk.is_loaded>:
     - while <[entity].is_spawned>:
+        # Проверка на редстоун
         - define material <[entity].location.material>
         - if ( <[material].name> == redstone_wire ) && ( <[material].power> >= 1 ):
             - if <[entity].flag[pose]> != <[material].power>:
                 - flag <[entity]> pose:<[material].power>
                 - run pose_stand def:<[entity]>|<[entity].flag[pose]>
+        # Проверка на магнетит
         - define material <[entity].location.add[0,-1,0].material>
         - if <[material].name> == lodestone:
             - define players <[entity].location.find_entities[player].within[8]>
@@ -124,17 +132,22 @@ stand_tick:
                 - look <[entity]> <[players].first.eye_location>
         - wait 2t
 
+# Выпадением предметов, после ломания кастомного стенда
 drop_stand:
     type: world
     debug: true
     events:
         on armor_stand dies:
+            - if !<context.entity.arms> && !<context.entity.is_small>:
+                - stop
             - define drops <context.drops>
+            # Убираем обычный арморстенд из дропа
             - foreach <[drops]> as:item:
                 - if <[item].material.name.if_null[null]> == armor_stand:
                     - define drops:<-:<[item]>
             - if <context.damager.gamemode.if_null[null]> == CREATIVE:
                 - stop
+            # И добавляем кастомный
             - if <context.entity.arms> && !<context.entity.is_small>:
                 - determine <[drops].include[<server.flag[stand_with_arms]>]>
             - if !<context.entity.arms> && <context.entity.is_small>:

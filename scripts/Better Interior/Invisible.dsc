@@ -1,8 +1,10 @@
+# Возможность делать стойки и рамки невидимыми или наоборот
 make_invisible:
     type: world
     debug: false
     events:
         after potion splash:
+        # Проверка на тип зелья
         - define is_invisible false
         - define is_water false
         - foreach <context.potion.effects_data> as:effect:
@@ -12,6 +14,7 @@ make_invisible:
                 - define is_water true
         - if !<[is_invisible]> && !<[is_water]>:
             - stop
+        # Делание сущностей невидимыми или наоборот
         - define entities <context.location.find_entities.within[3]>
         - foreach <[entities]> as:entity:
             - if <[entity].entity_type> == armor_stand:

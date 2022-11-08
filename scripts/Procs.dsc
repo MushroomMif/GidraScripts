@@ -1,3 +1,4 @@
+# Раскрашиваем тпс для таба
 colored_tps:
     type: procedure
     debug: false
@@ -12,6 +13,7 @@ colored_tps:
     - else:
         - determine <red><[tps]>
 
+# Получаем и раскрашиваем MSPT для таба
 colored_mspt:
     type: procedure
     debug: false
@@ -24,6 +26,7 @@ colored_mspt:
     - else:
         - determine <red><[mspt]>
 
+# Раскрашиваем пинг для таба
 colored_ping:
     type: procedure
     debug: false
@@ -36,6 +39,7 @@ colored_ping:
     - else:
         - determine <red><[ping]>
 
+# Парсим tab.yml
 parse_tab_element:
     type: procedure
     debug: false
@@ -50,6 +54,7 @@ parse_tab_element:
             - define text <[text]><[value].parsed.parse_color><n>
     - determine <[text]>
 
+# Проверка на кастомный предмет
 is_oraxen_item:
     type: procedure
     debug: false

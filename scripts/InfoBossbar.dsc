@@ -1,3 +1,4 @@
+# Подгрузка данных из yml файла
 load_bossbar_data:
     type: world
     debug: false
@@ -5,6 +6,7 @@ load_bossbar_data:
         on scripts loaded:
         - yaml load:/config/bossbar.yml id:bossbar
 
+# Показ боссбара на основе данных
 show_bossbar:
     type: world
     debug: false

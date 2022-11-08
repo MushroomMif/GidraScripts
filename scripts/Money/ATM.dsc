@@ -1,3 +1,4 @@
+# Регистрация меню
 atm_gui:
     type: inventory
     inventory: chest
@@ -9,6 +10,7 @@ atm_gui:
     - [] [] [bronze_coin_icon] [] [silver_coin_icon] [] [gold_coin_icon] [] []
     - [] [] [] [] [] [] [] [] []
 
+# Регистрация иконок
 bronze_coin_icon:
     type: item
     material: acacia_button
@@ -56,6 +58,7 @@ gold_coin_icon:
     mechanisms:
         hides: ALL
 
+# Регистриация команды (пока) для админов
 atm_cmd:
     type: command
     name: atm
@@ -65,6 +68,7 @@ atm_cmd:
     - stop if:!<player.is_op>
     - inventory open d:atm_gui
 
+# Получение/обмен монет
 atm_gui_click:
     type: world
     debug: false
@@ -128,6 +132,7 @@ atm_gui_click:
             - else:
                 - narrate "<red>Недостаточно предметов"
 
+# Открытие меню при клике на нпс
 atm_gui_open:
     type: world
     debug: false

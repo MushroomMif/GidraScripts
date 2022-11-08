@@ -1,3 +1,4 @@
+# Выдаём или забираем право для просмтотра через порталы
 seeportal:
     type: command
     name: seeportal

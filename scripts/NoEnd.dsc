@@ -1,3 +1,4 @@
+# Запрет ходить в энд
 no_end:
     type: world
     debug: false

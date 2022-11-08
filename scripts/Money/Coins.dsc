@@ -1,3 +1,4 @@
+# Регистрация монет
 bronze_coin:
     type: item
     material: acacia_button
@@ -34,6 +35,7 @@ gold_coin:
     mechanisms:
         hides: ALL
 
+# Запрет ставить бронзовую монету, т.к. она кнопка
 prevent_bronze_coin_place:
     type: world
     debug: false

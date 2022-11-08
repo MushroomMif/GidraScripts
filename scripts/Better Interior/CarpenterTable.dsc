@@ -1,3 +1,4 @@
+# Открытие меню стола
 on_carpenter_block_click:
     type: world
     debug: false
@@ -6,6 +7,7 @@ on_carpenter_block_click:
         - if !<player.is_sneaking> && <context.location.has_flag[oraxen_type]> && ( <context.location.flag[oraxen_type]> == carpenter_table ):
             - opentrades trade[result=armor_stand;inputs=smooth_stone_slab|stick[quantity=6];max_uses=9999]|trade[result=<server.flag[statuette]>;inputs=smooth_stone_slab|stick[quantity=3];max_uses=9999]|trade[result=<server.flag[stand_with_arms]>;inputs=armor_stand|redstone_torch[quantity=2];max_uses=9999]|trade[result=<server.flag[statuette_with_arms]>;inputs=<server.flag[statuette]>|redstone_torch;max_uses=9999] "title:Столярный верстак"
 
+# Возможность крафтить стол из шлюбых досок
 carpenter_table:
     type: item
     debug: false

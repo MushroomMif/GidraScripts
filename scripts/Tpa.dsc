@@ -1,3 +1,4 @@
+# Регистрация предмета
 teleport_item:
     type: item
     debug: false
@@ -17,6 +18,7 @@ teleport_item:
             - material:crying_obsidian|material:amethyst_shard|material:crying_obsidian
             - material:crying_obsidian|material:crying_obsidian|material:crying_obsidian
 
+# Регистрация меню
 teleport_gui:
     type: inventory
     inventory: chest
@@ -28,8 +30,6 @@ teleport_logic:
     type: world
     debug: false
     events:
-        # on server prestart:
-        # - flag server teleport_requests:<map>
         on player join:
         - flag <player> tp_ruqests:<list>
         # Открытие меню
@@ -39,6 +39,7 @@ teleport_logic:
             - if <player.has_flag[used_pearl]>:
                 - narrate "<red>Вы сможете воспользоваться телепортером через <yellow><player.flag[cant_tp]> <red>секунд."
             - else:
+                # Когда игрок решил использовать пёрл
                 - clickable for:<player> until:300s save:use_pearl:
                     - stop if:<player.has_flag[used_pearl]>
                     - playsound <player> sound:UI_BUTTON_CLICK
@@ -52,9 +53,10 @@ teleport_logic:
                         - narrate "ꐮ <red>Недостаточно предметов."
                 - narrate "<red>Вы сможете воспользоваться телепортером через <yellow><player.flag[cant_tp]> <red>секунд. <element[<dark_purple><&lb>ИСПОЛЬЗОВАТЬ ЖЕМЧУГ ЭНДЕРА<&rb>].on_click[<entry[use_pearl].command>].on_hover[<element[Нажмите, чтобы потратить жемчуг эндера<n>и уменьшить кулдаун на <yellow>240 <&r>секунд]>]>"
             - stop
-        # Если нет
+        # Если нет кулдауна
         - inventory open d:teleport_gui
-        - foreach <server.online_players> as:target:
+        # Выдаём головы всех игроков у которых тоже есть телепортер в меню
+        - foreach <server.online_players.exclude[<player>]> as:target:
             - if <[target].inventory.contains_item[teleport_item]>:
                 - give <item[player_head].with[skull_skin=<[target].name>;display=<red><[target].name>;lore=<list[<dark_gray>Нажми <green>ЛКМ<dark_gray>, чтобы|<dark_gray>телепортироваться к <red><[target].name>]>].with_flag[target:<[target]>]> to:<player.open_inventory>
         # Запрос на телепорт к кому-то

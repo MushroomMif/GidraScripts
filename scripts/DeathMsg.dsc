@@ -1,3 +1,4 @@
+# Изменение сообщения о смрети, просто прикольно
 death_msg:
     type: world
     debug: false
