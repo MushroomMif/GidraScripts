@@ -41,9 +41,11 @@ teleport_logic:
             - else:
                 - clickable for:<player> until:300s save:use_pearl:
                     - stop if:<player.has_flag[used_pearl]>
+                    - playsound <player> sound:UI_BUTTON_CLICK
                     - if <player.inventory.contains_item[ender_pearl]>:
                         - take item:ender_pearl quantity:1 from:<player.inventory>
                         - narrate "ꐰ <green>Успешно"
+                        - playsound <player> sound:ENTITY_ENDER_EYE_LAUNCH
                         - flag <player> cant_tp:-:240
                         - flag <player> used_pearl:true
                     - else:
@@ -52,12 +54,15 @@ teleport_logic:
             - stop
         # Если нет
         - inventory open d:teleport_gui
-        - foreach <server.online_players.exclude[<player>]> as:target:
+        - foreach <server.online_players> as:target:
             - if <[target].inventory.contains_item[teleport_item]>:
                 - give <item[player_head].with[skull_skin=<[target].name>;display=<red><[target].name>;lore=<list[<dark_gray>Нажми <green>ЛКМ<dark_gray>, чтобы|<dark_gray>телепортироваться к <red><[target].name>]>].with_flag[target:<[target]>]> to:<player.open_inventory>
         # Запрос на телепорт к кому-то
         on player left clicks player_head in teleport_gui:
+        - if <context.raw_slot> > 27:
+            - stop
         - define target <context.item.flag[target]>
+        - playsound <player> sound:UI_BUTTON_CLICK
         - if <server.online_players> contains <[target]>:
             - define sender <player>
             - if <[sender].has_flag[cant_send_to_<[target].name>]>:
@@ -68,6 +73,7 @@ teleport_logic:
                 - if !<[sender].is_online>:
                     - narrate "ꐮ <red>Игрок оффлайн" targets:<[target]>
                     - stop
+                - inventory close player:<[sender]>
                 - flag <[sender]> cant_tp:300
                 # Отменить все другие запросы
                 - foreach <[sender].flag[tp_requests]> as:id:
@@ -75,7 +81,9 @@ teleport_logic:
                 - flag <[sender]> tp_requests:<list>
                 # — — — — — — — — — — — — — —
                 - narrate "ꐰ <green>Вы приняли запрос на телепортацию, <red><[sender].name> <green>будет телепортирован к вам через <red>3 <green>секунды." targets:<[target]>
+                - playsound <[target]> sound:UI_BUTTON_CLICK
                 - narrate "ꐰ <red><[target].name> <green>принял запрос на телепортацию, вы будете телепортированы к нему через <red>3 <green>секунды." targets:<[sender]>
+                - playsound <[sender]> sound:entity_arrow_hit_player
                 - wait 3s
                 - if !<[target].is_online>:
                     - narrate "ꐮ <red>Игрок оффлайн" targets:<[sender]>
@@ -84,7 +92,11 @@ teleport_logic:
                 - if !<[sender].is_online>:
                     - narrate "ꐮ <red>Игрок оффлайн" targets:<[target]>
                     - stop
+                - playsound <[sender].location> sound:ENTITY_ENDERMAN_TELEPORT
+                - playeffect at:<[sender].eye_location> effect:PORTAL quantity:50 offset:0.15
                 - teleport <[sender]> <[target].location>
+                - playsound <[target].location> sound:ENTITY_ENDERMAN_TELEPORT
+                - playeffect at:<[target].eye_location> effect:PORTAL quantity:50 offset:0.15
                 # Кулдаун телепорта
                 - while <[sender].flag[cant_tp]> > 0:
                     - flag <[sender]> cant_tp:--
@@ -94,6 +106,7 @@ teleport_logic:
             # Когда отправили запрос
             - flag <[sender]> cant_send_to_<[target].name> expire:60s
             - narrate "ꐯ <red><[sender].name> <gold>отправил вам запрос на телепортацию. <green><element[<&lb>ПРИНЯТЬ<&rb>].on_click[<entry[accept].command>].on_hover[<element[Нажмите, чтобы принять запрос]>]>" targets:<[target]>
+            - playsound <[target]> sound:UI_TOAST_IN
             - flag <[sender]> tp_requests:->:<entry[accept].id>
         - else:
             - narrate "ꐮ <red>Игрок оффлайн"
