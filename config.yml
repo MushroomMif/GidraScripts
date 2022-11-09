@@ -226,6 +226,9 @@ Commands:
         # and that none of Denizen, the Denizen team, Spigot, Mojang, etc. in any way support or endorse abusing these tools.
         # Enable at your own risk.
         Allow restricted actions: true
+    Mongo:
+        # Whether to allow the Mongo command.
+        Allow: true
 Tags:
     # How long a tag can parse before force-closing the tag parser engine. Set to 0 to disable tag parse timing entirely.
     Timeout: 10
@@ -329,4 +332,4 @@ Colors:
 # The below value is how many times automatic updates have been applied
 # since you last cleaned this file.
 # ----------- End Important! -----------
-times_changed: 1
+times_changed: 2
