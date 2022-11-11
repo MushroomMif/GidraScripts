@@ -4,3 +4,4 @@ schematics/
 secrets.secret
 server_flags.dat
 test.dsc
+Whitelist.dsc

@@ -49,9 +49,9 @@ parse_tab_element:
     - define text ꐖꐡ
     - foreach <[list]> as:value:
         - if <[value].contains_text[%end%]>:
-            - define text <[text]><[value].replace_text[%end%].parsed.parse_color>
+            - define text <[text]><[value].replace_text[%end%].parse_minimessage.parsed>
         - else:
-            - define text <[text]><[value].parsed.parse_color><n>
+            - define text <[text]><[value].parse_minimessage.parsed><n>
     - determine <[text]>
 
 # Проверка на кастомный предмет

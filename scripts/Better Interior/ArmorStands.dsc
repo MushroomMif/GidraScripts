@@ -135,7 +135,7 @@ stand_tick:
 # Выпадением предметов, после ломания кастомного стенда
 drop_stand:
     type: world
-    debug: true
+    debug: false
     events:
         on armor_stand dies:
             - if !<context.entity.arms> && !<context.entity.is_small>:

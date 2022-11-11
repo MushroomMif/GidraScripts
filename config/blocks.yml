@@ -1,6 +1,0 @@
-blocks:
-  carpenter_table:
-    type: note_block
-    instrument: BASS_DRUM
-    note: 2
-    powered: false
