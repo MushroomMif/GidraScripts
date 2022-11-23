@@ -1,6 +1,7 @@
 # Регистрация монет
 bronze_coin:
     type: item
+    debug: false
     material: acacia_button
     display name: <&color[#cd7f32]>Бронзовая монета
     lore:
@@ -13,6 +14,7 @@ bronze_coin:
 
 silver_coin:
     type: item
+    debug: false
     material: iron_nugget
     display name: <&color[#738595]>Серебряная монета
     lore:
@@ -25,6 +27,7 @@ silver_coin:
 
 gold_coin:
     type: item
+    debug: false
     material: gold_nugget
     display name: <&color[#ffd700]>Золотая монета
     lore:

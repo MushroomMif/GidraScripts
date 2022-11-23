@@ -20,3 +20,43 @@ space_replacer: "-"
     input1: <server.flag[statuette]>
     input2: redstone_torch
     result: <server.flag[statuette_with_arms]>
+
+Скупщик:
+  - алмаз:
+    input1: diamond
+    result: <item[silver_coin]>
+  - золото:
+    input1: raw_gold
+    result: <item[bronze_coin].with[quantity=8]>
+  - железо:
+    input1: raw_iron
+    result: <item[bronze_coin].with[quantity=6]>
+  - медь:
+    input1: <item[raw_copper].with[quantity=4]>
+    result: <item[bronze_coin]>
+  - уголь:
+    input1: <item[coal].with[quantity=2]>
+    result: <item[bronze_coin]>
+  - обсидиан:
+    input1: obsidian
+    result: <item[bronze_coin]>
+
+Шахтёр:
+  - алмаз:
+    input1: <item[silver_coin]>
+    result: diamond
+  - золото:
+    input1: <item[bronze_coin].with[quantity=8]>
+    result: raw_gold
+  - железо:
+    input1: <item[bronze_coin].with[quantity=6]>
+    result: raw_iron
+  - медь:
+    input1: <item[bronze_coin]>
+    result: <item[raw_copper].with[quantity=4]>
+  - уголь:
+    input1: <item[bronze_coin]>
+    result: <item[coal].with[quantity=2]>
+  - обсидиан:
+    input1: <item[bronze_coin]>
+    result: obsidian

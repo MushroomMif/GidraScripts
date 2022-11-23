@@ -1,6 +1,7 @@
 # Регистрация меню
 atm_gui:
     type: inventory
+    debug: false
     inventory: chest
     title: Банкомат
     size: 27
@@ -13,6 +14,7 @@ atm_gui:
 # Регистрация иконок
 bronze_coin_icon:
     type: item
+    debug: false
     material: acacia_button
     display name: <&color[#cd7f32]>Бронзовая монета
     lore:
@@ -26,6 +28,7 @@ bronze_coin_icon:
 
 silver_coin_icon:
     type: item
+    debug: false
     material: iron_nugget
     display name: <&color[#738595]>Серебряная монета
     lore:
@@ -36,10 +39,6 @@ silver_coin_icon:
     - <dark_gray>Нажмите <green>ПКМ<dark_gray>,
     - <dark_gray>чтобы получить <red>1<dark_gray> <&color[#738595]>серебряную монету
     - <dark_gray>в обмен на 64 бронзовых
-    - <dark_gray>
-    - <dark_gray>Нажмите <green>ШИФТ+ПКМ<dark_gray>,
-    - <dark_gray>чтобы получить <red>1<dark_gray> <&color[#738595]>серебряную монету
-    - <dark_gray>в обмен на 1 алмаз
     enchantments:
     - luck:1
     mechanisms:
@@ -47,6 +46,7 @@ silver_coin_icon:
 
 gold_coin_icon:
     type: item
+    debug: false
     material: gold_nugget
     display name: <&color[#ffd700]>Золотая монета
     lore:
@@ -61,6 +61,7 @@ gold_coin_icon:
 # Регистриация команды (пока) для админов
 atm_cmd:
     type: command
+    debug: false
     name: atm
     usage: /atm
     description: Открывает банкомат
@@ -102,17 +103,6 @@ atm_gui_click:
             - if <player.inventory.contains_item[bronze_coin].quantity[64]>:
                 - if <player.inventory.can_fit[silver_coin].quantity[1]>:
                     - take item:bronze_coin quantity:64
-                    - give silver_coin quantity:1
-                    - narrate "<green>Обмен проведён успшено"
-                - else:
-                    - narrate "<red>В вашем инвентаре недостаточно места"
-            - else:
-                - narrate "<red>Недостаточно предметов"
-        # Серебряные в обмен на алмаз
-        - else if <context.click> == SHIFT_RIGHT:
-            - if <player.inventory.contains_item[diamond].quantity[1]>:
-                - if <player.inventory.can_fit[silver_coin].quantity[1]>:
-                    - take item:diamond quantity:1
                     - give silver_coin quantity:1
                     - narrate "<green>Обмен проведён успшено"
                 - else:

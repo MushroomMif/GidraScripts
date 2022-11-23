@@ -15,4 +15,4 @@ open_trades:
         - define space <yaml[trades].read[space_replacer]>
         - define trades <yaml[trades].read[<npc.name.replace[ ].with[<[space]>]>]||null>
         - stop if:<[trades].equals[null]>
-        - opentrades <[trades].proc[generate_trades]> title:<npc.name>
+        - opentrades <[trades].proc[generate_trades].parsed> title:<npc.name>

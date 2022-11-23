@@ -82,4 +82,4 @@ generate_trades:
         - define output <[output]>;result=<[result]>]
         - if <[trades].size> > <[trade_count]>:
             - define output <[output]>|
-    - determine <[output].parsed>
+    - determine <[output]>
