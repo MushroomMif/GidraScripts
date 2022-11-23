@@ -54,14 +54,24 @@ parse_tab_element:
             - define text <[text]><[value].parse_minimessage.parsed><n>
     - determine <[text]>
 
-# Проверка на кастомный предмет
-is_oraxen_item:
+# Получение айди кастомного предмета (если предмет не кастомный, то null)
+get_custom_id:
     type: procedure
     debug: false
-    definitions: item|id
+    definitions: item
     script:
-    - define raw_nbt <[item].raw_nbt>
-    - if <[raw_nbt].contains[PublicBukkitValues]> && <[raw_nbt].get[PublicBukkitValues].contains[oraxen:id]> && ( <[raw_nbt].get[PublicBukkitValues].get[oraxen:id]> == string:<[id]> ):
-        - determine true
-    - else:
-        - determine false
+    - define id <[item].all_raw_nbt.get[nova].get[id].replace_text[string:]||null>
+    - define id null if:<[id].equals[null]>
+    - determine <[id]>
+
+# Проверка на кастомный предмет
+# is_custom_item:
+#     type: procedure
+#     debug: false
+#     definitions: item|id
+#     script:
+#     - define raw_nbt <[item].all_raw_nbt>
+#     - if <[raw_nbt].contains[PublicBukkitValues]> && <[raw_nbt].get[PublicBukkitValues].contains[oraxen:id]> && ( <[raw_nbt].get[PublicBukkitValues].get[oraxen:id]> == string:<[id]> ):
+#         - determine true
+#     - else:
+#         - determine false

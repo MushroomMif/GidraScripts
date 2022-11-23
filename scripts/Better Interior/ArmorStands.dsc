@@ -1,34 +1,34 @@
 # Спавн кастомных стендов после нажатия соотвествующим предметом
-stand_with_arms:
+spawn_stand_with_arms:
     type: world
     debug: false
     events:
-        on player right clicks block with:paper:
-        - if <proc[is_oraxen_item].context[<player.item_in_hand>|stand_with_arms]>:
+        on player right clicks block with:shulker_shell:
+        - if <proc[get_custom_id].context[<player.item_in_hand>]> == betterinterior:stand_with_arms:
             - if ( <context.location.up[1].material.name> == air ) && ( <context.location.up[2].material.name> == air ):
                 - spawn <context.location.up[1].center> armor_stand save:stand
                 - adjust <entry[stand].spawned_entity> arms:true
                 - look <entry[stand].spawned_entity> <player.eye_location>
                 - take iteminhand quantity:1 if:!<player.gamemode.equals[creative]>
 
-statuette:
+spawn_statuette:
     type: world
     debug: false
     events:
-        on player right clicks block with:paper:
-        - if <proc[is_oraxen_item].context[<player.item_in_hand>|statuette]>:
+        on player right clicks block with:shulker_shell ignorecancelled:true bukkit_priority:HIGHEST:
+        - if <proc[get_custom_id].context[<player.item_in_hand>]> == betterinterior:statuette:
             - if ( <context.location.up[1].material.name> == air ) && ( <context.location.up[2].material.name> == air ):
                 - spawn <context.location.up[1].center> armor_stand save:stand
                 - adjust <entry[stand].spawned_entity> is_small:true
                 - look <entry[stand].spawned_entity> <player.eye_location>
                 - take iteminhand quantity:1 if:!<player.gamemode.equals[creative]>
 
-statuette_with_arms:
+spawn_statuette_with_arms:
     type: world
     debug: false
     events:
-        on player right clicks block with:paper:
-        - if <proc[is_oraxen_item].context[<player.item_in_hand>|statuette_with_arms]>:
+        on player right clicks block with:shulker_shell:
+        - if <proc[get_custom_id].context[<player.item_in_hand>]> == betterinterior:statuette_with_arms:
             - if ( <context.location.up[1].material.name> == air ) && ( <context.location.up[2].material.name> == air ):
                 - spawn <context.location.up[1].center> armor_stand save:stand
                 - adjust <entry[stand].spawned_entity> is_small:true
@@ -116,7 +116,6 @@ stand_tick:
     debug: false
     definitions: entity
     script:
-    #- while <[entity].location.chunk.is_loaded>:
     - while <[entity].is_spawned>:
         # Проверка на редстоун
         - define material <[entity].location.material>
