@@ -1,0 +1,22 @@
+space_replacer: "-"
+
+Столярный-Верстак:
+  - armor_stand:
+    input1: smooth_stone_slab
+    input2: <item[stick].with[quantity=6]>
+    result: armor_stand
+
+  - statuette:
+    input1: smooth_stone_slab
+    input2: <item[stick].with[quantity=3]>
+    result: <server.flag[statuette]>
+
+  - stand_with_arms:
+    input1: armor_stand
+    input2: <item[redstone_torch].with[quantity=2]>
+    result: <server.flag[stand_with_arms]>
+
+  - stand_with_arms:
+    input1: <server.flag[statuette]>
+    input2: redstone_torch
+    result: <server.flag[statuette_with_arms]>
