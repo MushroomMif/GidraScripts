@@ -65,8 +65,8 @@ atm_cmd:
     name: atm
     usage: /atm
     description: Открывает банкомат
+    permission: gidra.open_trades
     script:
-    - stop if:!<player.is_op>
     - inventory open d:atm_gui
 
 # Получение/обмен монет

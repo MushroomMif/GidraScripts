@@ -62,6 +62,9 @@ space_replacer: "-"
     result: obsidian
 
 Коллекционер:
+  - разблокиратор_команд:
+    input1: <item[gold_coin]>
+    result: <item[trades_cmd_unblocker]>
   - древний_город:
     input1: <item[silver_coin].with[quantity=13]>
     result: <item[ancient_chest]>
