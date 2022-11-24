@@ -1,4 +1,11 @@
 # Открытие меню стола
+load_trades_on_start:
+    type: world
+    debug: false
+    events:
+        on server prestart:
+        - yaml load:/config/trades.yml id:trades
+
 on_carpenter_block_click:
     type: world
     debug: false

@@ -60,3 +60,41 @@ space_replacer: "-"
   - обсидиан:
     input1: <item[bronze_coin]>
     result: obsidian
+
+Коллекционер:
+  - древний_город:
+    input1: <item[silver_coin].with[quantity=13]>
+    result: <item[ancient_chest]>
+  - джунглиевый_храм:
+    input1: <item[silver_coin].with[quantity=2]>
+    result: <item[jungle_chest]>
+  - земля_картина:
+    input1: <item[silver_coin]>
+    result: <item[earth_painting]>
+  - ветер_картина:
+    input1: <item[silver_coin]>
+    result: <item[wind_painting]>
+  - вода_картина:
+    input1: <item[silver_coin]>
+    result: <item[water_painting]>
+  - огонь_картина:
+    input1: <item[silver_coin]>
+    result: <item[fire_painting]>
+  - лампа:
+    input1: <item[silver_coin]>
+    result: <item[lit_redstone_lamp]>
+  - печь:
+    input1: <item[silver_coin]>
+    result: <item[lit_furnace]>
+  - коптильня:
+    input1: <item[silver_coin]>
+    result: <item[lit_smoker]>
+  - плавильная_печь:
+    input1: <item[silver_coin]>
+    result: <item[lit_blast_furnace]>
+  - бочка:
+    input1: <item[silver_coin]>
+    result: <item[opened_barrel]>
+  - катализатор:
+    input1: <item[silver_coin].with[quantity=3]>
+    result: <item[bloom_catalyst]>
