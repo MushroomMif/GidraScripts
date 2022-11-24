@@ -8,6 +8,7 @@ teleport_item:
     - luck_of_the_sea:1
     mechanisms:
         hides: ALL
+        custom_model_data: 1
     allow in material recipes: false
     recipes:
         1:
@@ -112,3 +113,12 @@ teleport_logic:
             - flag <[sender]> tp_requests:->:<entry[accept].id>
         - else:
             - narrate "ꐮ <red>Игрок оффлайн"
+        on shutdown:
+        - foreach <server.players_flagged[cant_tp]> as:__player:
+            - flag <player> cant_tp:!
+        - foreach <server.players_flagged[used_pearl]> as:__player:
+            - flag <player> used_pearl:!
+        on player clicks teleport_item in inventory:
+        - if <context.item.custom_model_data||null> != 1:
+            - take item:<context.item> quantity:<context.item.quantity>
+            - give <item[teleport_item]> quantity:<context.item.quantity>
