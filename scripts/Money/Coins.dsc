@@ -47,14 +47,10 @@ prevent_bronze_coin_place:
         - if <context.item_in_hand.with[quantity=1]> == <item[bronze_coin]>:
             - determine cancelled
 
-
-#TODO: Предотвращать переименование монет
-# prevent_coin_rename:
-#     type: world
-#     debug: true
-#     events:
-#         on player prepares anvil craft item:
-#         - stop if:<context.item.hides.if_null[null].equals[null]>
-#         - narrate <context.item.hides>
-#         - if <context.item.hides> contains ENCHANTS:
-#             - determine cancelled
+prevent_coin_rename:
+    type: world
+    debug: false
+    events:
+        on player prepares anvil craft *_coin:
+        - if <context.inventory.slot[1].hides||null> contains ENCHANTS:
+            - determine <item[air]>
