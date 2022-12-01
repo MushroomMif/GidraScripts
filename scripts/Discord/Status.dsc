@@ -8,9 +8,11 @@ embed_builder:
         # канал 1045686072811728986
         - define msg <discord_message[bot,1045686072811728986,1046809330260918372]>
         - while true:
+            - inject get_top_players
             - definemap lines:
                 status: "Сервер: <element[**].escaped>🟢Включен<element[**].escaped>"
                 players: "Игроки онлайн: <proc[players_online]>"
+                advancements_top: "Топ достижений: <[message]>"
                 next_restart: "Следующий рестарт: <element[**].escaped><static[<server.flag[next_restart_in]>]><element[**].escaped>"
             - define field_content ""
             - foreach <[lines]> as:line:
