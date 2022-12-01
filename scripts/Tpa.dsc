@@ -113,12 +113,24 @@ teleport_logic:
             - flag <[sender]> tp_requests:->:<entry[accept].id>
         - else:
             - narrate "ꐮ <red>Игрок оффлайн"
+        # Фикс флагов при выключении сервера
         on shutdown:
         - foreach <server.players_flagged[cant_tp]> as:__player:
             - flag <player> cant_tp:!
         - foreach <server.players_flagged[used_pearl]> as:__player:
             - flag <player> used_pearl:!
+        # Установка текстуры старому телепортеру
         on player clicks teleport_item in inventory:
         - if <context.item.custom_model_data||null> != 1:
             - take item:<context.item> quantity:<context.item.quantity>
             - give <item[teleport_item]> quantity:<context.item.quantity>
+        # Фикс возможности покрасить овцу с помощью телепортера
+        on player right clicks sheep with:teleport_item:
+        - determine cancelled
+        # Фикс отрицательного кулдауна
+        after server start:
+        - while true:
+            - foreach <server.online_players_flagged[cant_tp]> as:__player:
+                - if <player.flag[cant_tp]> <= 0:
+                    - flag <player> cant_tp:!
+            - wait 5t
