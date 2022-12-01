@@ -52,5 +52,4 @@ prevent_coin_rename:
     debug: false
     events:
         on player prepares anvil craft *_coin:
-        - if <context.inventory.slot[1].hides||null> contains ENCHANTS:
-            - determine <item[air]>
+        - determine <item[air]>
