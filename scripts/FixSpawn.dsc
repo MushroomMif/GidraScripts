@@ -6,3 +6,5 @@ decrease_spawn:
         - determine cancelled
         on pig spawns:
         - determine cancelled
+        on chunk loads for the first time:
+        - remove <context.chunk.entities[pig]>
