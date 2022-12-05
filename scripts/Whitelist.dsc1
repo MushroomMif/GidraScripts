@@ -1,7 +1,0 @@
-whitelist:
-    type: world
-    debug: false
-    events:
-        on player prelogin:
-        - if <context.name> != MushroomMif:
-            - determine KICKED<element[ <red>Ведутся техработы]>

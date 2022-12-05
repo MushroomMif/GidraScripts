@@ -4,9 +4,9 @@ embed_builder:
     events:
         after server start:
         - ~discordconnect id:bot token:<secret[token]>
-        # сообщение 1046809330260918372
-        # канал 1045686072811728986
-        - define msg <discord_message[bot,1045686072811728986,1046809330260918372]>
+        # сообщение 1049317239196762145
+        # канал 1049316646164123718
+        - define msg <discord_message[bot,1049316646164123718,1049317239196762145]>
         - while true:
             - inject get_top_players
             - definemap lines:
@@ -25,12 +25,24 @@ embed_on_shutdown:
     debug: false
     events:
         on stop command:
+        - stop if:!<player.is_op>
         - determine FULFILLED passively
-        - define msg <discord_message[bot,1045686072811728986,1046809330260918372]>
+        - define msg <discord_message[bot,1049316646164123718,1049317239196762145]>
         - ~discordmessage id:bot edit:<[msg]> <discord_embed.with[color].as[<red>].add_field[Статус сервера].value[⁣Сервер: **🔴Отключен**]>
         - adjust server shutdown
         on restart command:
+        - stop if:!<player.is_op>
         - determine FULFILLED passively
-        - define msg <discord_message[bot,1045686072811728986,1046809330260918372]>
+        - define msg <discord_message[bot,1049316646164123718,1049317239196762145]>
         - ~discordmessage id:bot edit:<[msg]> <discord_embed.with[color].as[<red>].add_field[Статус сервера].value[⁣<n>Сервер: **🔴Отключен**]>
         - adjust server restart
+
+# На случай пропажи сообщения
+send_status_msg:
+    type: command
+    name: sendmsg
+    usage: /sendmsg
+    description: da
+    script:
+    - stop if:!<player.is_op>
+    - ~discordmessage id:bot channel:1049316646164123718 <discord_embed.with[color].as[<light_purple>].with[footer].as[da]>
